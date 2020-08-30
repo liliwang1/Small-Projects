@@ -1,0 +1,155 @@
+/*@font-face {*/
+/*    font-family: "creepy";*/
+/*    src: url(""); format(""), url("") format("")*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: "lunacy";*/
+/*    src: url(""); format(""), url("") format("")*/
+/*}*/
+
+* {
+    box-sizing: border-box;
+    /*cursor: url(""), auto;*/
+}
+
+html {
+    min-height: 100vh;
+    
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(darkred, #000);
+}
+
+.page-title {
+    color: red;
+    font-family: creepy, serif;
+    font-weight: normal;
+    text-align: center;
+    font-size: 6em;
+}
+
+.game-info-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-info {
+    color: indianred;
+    font-family: lunacy, serif;
+    font-size: 4em;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px;
+    margin: 50px;
+    justify-content: center;
+    perspective: 500px;
+}
+
+.card {
+    /*background-color: black;*/
+    position: relative;
+    height: 175px;
+    width: 125px;
+}
+
+.card.visible .card-back {
+    transform: rotateY(-180deg);
+}
+
+.card.visible .card-front {
+    transform: rotateY(0deg);
+}
+
+/*.card:hover .card-back {*/
+/*    transform: rotateY(-180deg);*/
+/*}*/
+
+/*.card:hover .card-front {*/
+/*    transform: rotateY(0deg);*/
+/*}*/
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border: 1px solid red;
+    border-radius: 12px;
+    transition: transform 500ms ease-in-out;
+}
+
+.card-back {
+    transform: scale(1);
+}
+
+.card-back:hover {
+    transform: scale(.9);
+}
+
+.card-front {
+    transform: rotateY(180deg);
+}
+
+.pokerback {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.pokerfront {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.overlay-text {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    color: red;
+    font-family: creepy, serif;
+}
+
+.overlay-text.visible {
+    display: flex;
+    flex-direction: column;
+    animation: overlay-grow 600ms forwards;
+}
+
+.overlay-text-small {
+    font-size: .3em;
+}
+
+@keyframes overlay-grow {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 0;
+    }
+    to {
+        background-color: rgba(0, 0, 0, .8);
+        font-size: 10em;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-container {
+        grid-template-columns: repeat(2, auto);
+    }
+    .game-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

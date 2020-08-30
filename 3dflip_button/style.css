@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    /*place-items: center;*/
+    place-content: center;
+    background-color: lightgray;
+    perspective: 1000px;
+}
+.btn {
+    /*display: block;*/
+    height: 150px;
+    width: 400px;
+    position: relative;
+    /*perspective: 5000px;*/    /*where should the perspective property go? parent?*/
+    transform-style: preserve-3d;
+    transition: transform 600ms ease-in-out;
+    transform: translateZ(-75px);
+}
+
+.btn:hover {
+    transform: rotateX(-90deg) translateY(75px); /* -75px?  75px not enough? */
+}
+
+.side {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    backface-visibility: hidden;
+}
+
+.default-side {
+    border: 10px solid cornflowerblue;
+    background-color: white;
+    color: cornflowerblue;
+    transform: translateZ(75px);
+}
+
+.hidden-side {
+    background-color: cornflowerblue;
+    color: white;
+    border: 10px solid white;
+    transform: rotateX(90deg) translateZ(75px);
+}
