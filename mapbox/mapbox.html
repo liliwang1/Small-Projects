@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Place the geocoder input outside the map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+          integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 100px; height: 400px; width: 50%; }
+    </style>
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link
+        rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+        type="text/css"
+/>
+<style>
+    .geocoder {
+        position: absolute;
+        z-index: 1;
+        width: 20%;
+        left: 50%;
+        margin-left: -25%;
+        top: 10px;
+    }
+    .mapboxgl-ctrl-geocoder {
+        min-width: 100%;
+    }
+    #map {
+        margin-top: 75px;
+    }
+    .coordinates {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 40px;
+        left: 10px;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-2">
+    <h1 class="navbar-brand font-weight-bold mr-auto">Weather & Map</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active font-weight-bold">
+                <a class="nav-link" href="#" id="date"></a>
+            </li>
+            <li class="nav-item mx-3 mt-2" id="icon"></li>
+            <li class="nav-item dropdown" id="dropdownCity">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">Cities</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">San Antonio</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">New York</a>
+                    <a class="dropdown-item" href="#">San Francisco</a>
+                    <!--                    <a class="dropdown-item" href="#">Xi'an</a>-->
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" class="geocoder" id="geocoder1">
+<!--            <input class="form-control mr-sm-2" type="search" placeholder="search cities..." id="cityInput">-->
+<!--            <button class="btn btn-outline-secondary my-2 my-sm-0 font-weight-bold" type="submit" id="citySearch">Search-->
+<!--            </button>-->
+
+        </form>
+    </div>
+</nav>
+<div id="map"></div>
+<div id="info"></div>
+<pre id="coordinates" class="coordinates"></pre>
+<!--<div id="geocoder" class="geocoder"></div>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGlsaW1vbnNpIiwiYSI6ImNrZWN4MG16ZDAwNTQycHFkb2luMGI0M2wifQ.-BycAwre48IOyh3Ue-ZjXw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+    });
+    var coordinates = document.getElementById('coordinates');
+    var marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([0, 0])
+        .addTo(map);
+
+    function onDragEnd() {
+        var lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML =
+            'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    }
+
+    marker.on('dragend', onDragEnd);
+
+    // var geocoder = new MapboxGeocoder({
+    //     accessToken: mapboxgl.accessToken,
+    //     mapboxgl: mapboxgl,
+    //     marker: {
+    //         draggable: true,
+    //         color: 'orange'
+    //     }
+    // });
+    //
+    // document.getElementById('geocoder1').appendChild(geocoder.onAdd(map));
+    //
+    // // function onDragEnd() {
+    // //     var lngLat = marker.getLngLat();
+    // //     coordinates.style.display = 'block';
+    // //     coordinates.innerHTML =
+    // //         'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    // // }
+    //
+    // console.log(geocoder);
+    //
+    // // geocoder.marker.on('dragend', onDragEnd);
+    // // console.log(geocoder.mapMarker);
+    // var lng = geocoder.mapMarker._lngLat.lng;
+    // var lat = geocoder.mapMarker._lngLat.lat;
+    // // $('#info').html(geocoder);
+
+</script>
+
+</body>
+</html>

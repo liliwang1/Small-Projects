@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Set a point after Geocoder result</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+<link
+        rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+        type="text/css"
+/>
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    #geocoder-container > div {
+        min-width: 50%;
+        margin-left: 25%;
+    }
+    .coordinates {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 40px;
+        left: 10px;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+    }
+</style>
+<div id="map"></div>
+<pre id="coordinates" class="coordinates"></pre>
+<script>
+    $(document).ready(function() {
+    mapboxgl.accessToken = 'pk.eyJ1IjoibGlsaW1vbnNpIiwiYSI6ImNrZWN4MG16ZDAwNTQycHFkb2luMGI0M2wifQ.-BycAwre48IOyh3Ue-ZjXw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+    });
+
+    var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        marker: {
+            color: 'pink',
+            draggable: true
+        },
+        mapboxgl: mapboxgl
+    });
+
+    map.addControl(geocoder);
+
+    var marker = new mapboxgl.Marker({
+        draggable: true
+    })
+        .setLngLat([-95.34, 29.96])
+        .addTo(map);
+
+    function onDragEnd() {
+        var lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML =
+            'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    }
+    function hello () {
+        console.log('hi');
+    }
+
+    // function onDragEnd1() {
+    //     var lngLat = geocoder.mapMarker.getLngLat();
+    //     coordinates.style.display = 'block';
+    //     coordinates.innerHTML =
+    //         'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+    // }
+    marker.on('dragend', onDragEnd);
+    geocoder.mapMarker.on('dragend', hello);
+    // console.log(geocoder);
+    });
+</script>
+
+</body>
+</html>
