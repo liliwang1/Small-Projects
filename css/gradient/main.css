@@ -1,0 +1,29 @@
+body {
+    height: 100vh;
+    /*background: linear-gradient(red, blue);*/
+    /*background: linear-gradient(45deg, red, blue, green);*/
+    /*background: linear-gradient(to right, red, blue, green);*/
+    /*background: linear-gradient(red 80%, blue 100%);*/
+    /*background: linear-gradient(-45deg, red 30%, blue 30%);*/
+    /*background: repeating-linear-gradient(red, purple 50px);*/
+    /*background: repeating-linear-gradient(red 20px, purple 50px);*/
+    /*background: repeating-linear-gradient(45deg, red, purple 50px, green 60px);*/
+
+    /*background: linear-gradient(45deg, rgb(76, 0, 255), transparent),*/
+    /*repeating-linear-gradient(45deg, rgb(183, 0, 255) 0%, rgb(183, 0, 255) 5%, transparent 5%, transparent 10%),*/
+    /*rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0 ,255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%);*/
+
+    /*background: linear-gradient(45deg, rgb(76, 0, 255), transparent),*/
+    /*repeating-linear-gradient(45deg, rgb(183, 0, 255) 0%, rgb(183, 0, 255) 5%, transparent 5%, transparent 10%, rgb(183, 0, 255) 10%, rgb(183, 0, 255) 11%, transparent 11%, transparent 13%),*/
+    /*rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0 ,255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%);*/
+
+    /*background: linear-gradient(45deg, rgb(76, 0, 255), transparent),*/
+    /*repeating-linear-gradient(45deg, rgba(183, 0, 255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%, rgba(183, 0, 255, 0.5) 10%, rgba(183, 0, 255, 0.5) 11%, transparent 11%, transparent 13%),*/
+    /*rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0 ,255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%);*/
+
+    background: linear-gradient(45deg, rgb(76, 0, 255), transparent),
+    repeating-linear-gradient(45deg, rgba(183, 0, 255, 0.5) 0%, rgba(183, 0, 255, 0.5) 5%, transparent 5%, transparent 10%, rgba(183, 0, 255, 0.5) 10%, rgba(183, 0, 255, 0.5) 11%, transparent 11%, transparent 13%),
+    rgb(216, 118, 255) repeating-linear-gradient(-45deg, rgba(183, 0 ,255, 0.5) 0px, rgba(183, 0, 255, 0.5) 30px, transparent 30px, transparent 45px);
+
+}
+
